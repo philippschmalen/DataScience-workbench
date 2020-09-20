@@ -11,9 +11,7 @@ class Lists:
 
     def list_remove_duplicates(l):
         """Removes duplicates from list elements whilst preserving element order
-        adapted from 
-        https://stackoverflow.com/questions/480214/how-do-you-remove-duplicates-from-a-list-whilst-preserving-order
-        
+
         Input
             list with string elements
         
@@ -21,9 +19,7 @@ class Lists:
             Sorted list without duplicates
         
         """
-        seen = set()
-        seen_add = seen.add
-        return [x for x in l if not (x in seen or seen_add(x))]
+        return list(dict.fromkeys(l))
 
     def list_batch(lst, n=5):
         """Yield successive n-sized chunks from list lst
@@ -81,3 +77,6 @@ class Lists:
 	            i += 1
 	            
 	    return x
+
+
+
