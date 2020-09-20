@@ -40,3 +40,44 @@ class Lists:
         
         for i in range(0, len(lst), n):
             yield lst[i:i + n]
+
+
+	def list_string_manual_correction(x):
+	    """Traverse a list of strings and correct entries manually
+	    Can be applied to pandas Series object
+	    
+	    Input
+	        x: list with keywords to manually correct
+	        
+	    Return
+	        list: manually corrected list
+	    
+	    
+	    """
+	    
+	    print("Correct strings manually. \n\
+	    \t1. Go forward with ENTER \n\
+	    \t2. Go backwards by typing the backwardsstep number.\n\
+	    \tExit by typing 'exit'")
+	    
+	    i = 0
+	    while i < len(x):
+	        correction = input("{}\t {} >>>".format(i, x[i]))
+
+	        ## navigate in integer steps
+	        # when integer specified, change index 
+	        if correction.isnumeric():
+	            i -= int(correction)
+	            
+	        elif correction == 'exit':
+	            i = len(x)
+	            
+	        elif len(correction) > 0 and correction != 'exit':
+	            x[i] = correction
+	            i += 1
+
+	        # if nothing specified go 1 step forward 
+	        else:
+	            i += 1
+	            
+	    return x
