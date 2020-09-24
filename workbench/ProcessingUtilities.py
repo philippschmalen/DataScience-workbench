@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-
+import glob
 
 class Processing:
 
@@ -8,6 +8,26 @@ class Processing:
 
   	""" Class with methods to handle data processing 
   	"""
+
+
+
+  def get_files(filepath):
+    """List all files within filepath
+    Args
+      filepath: string specifying folder
+
+    Return
+      list: string list elements with filenames 
+    
+    """
+    all_files = []
+    for root, dirs, files in os.walk(filepath):
+        files = glob.glob(os.path.join(root,'*.json'))
+        for f in files :
+            all_files.append(os.path.abspath(f))
+
+    return all_files
+
 
 
   def make_csv(x, filename, data_dir, append=False, header=False, index=False):
