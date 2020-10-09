@@ -50,8 +50,6 @@ class Time:
 	        return d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))    
 
 
-	
-
 	def sleep_countdown(duration, print_step=2):
 		"""Sleep for certain duration and print remaining time in steps of print_step
 		
@@ -62,7 +60,18 @@ class Time:
 		Return 
 			None
 		"""
-		for i in range(duration,0,-print_step):
-		    sleep(print_step)
-		    sys.stdout.write(str(i-print_step)+' ')
-		    sys.stdout.flush()
+		sys.stdout.write("\r Seconds remaining:")
+
+		for remaining in range(duration, 0, -1):
+			# display only steps
+			if remaining % print_step == 0:
+			    sys.stdout.write("\r")
+			    sys.stdout.write("{:2d}".format(remaining))
+			    sys.stdout.flush()
+
+			time.sleep(1)
+
+		sys.stdout.write("\r Complete!\n")
+
+
+
