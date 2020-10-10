@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='datascience-workbench',
-      version='0.2.1',
+      version='0.2.3',
       description='Utilities for data science projects',
 		long_description=long_description,
     	long_description_content_type="text/markdown",

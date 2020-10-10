@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import glob
+from glob import glob
 
 class Processing:
 
@@ -9,24 +9,46 @@ class Processing:
   	""" Class with methods to handle data processing 
   	"""
 
-
-
-  def get_files(filepath):
-    """List all files within filepath
+  def get_files(filepath='./', name_contains="", absolute_path=True, subdirectories=True):
+    """List all files of directory filepath with their absolute filepaths
+    
     Args
-      filepath: string specifying folder
+      filepath:       string specifying folder
+      name_containts: string with constraint on name, 
+                      for example all python files "*.py"
+      absolute_path:  return absolute paths of files or not
+      subdirectories: include subdirectories or not  
 
     Return
-      list: string list elements with filenames 
+      list: list with string elements of filenames 
     
     """
-    all_files = []
-    for root, dirs, files in os.walk(filepath):
-        files = glob.glob(os.path.join(root,'*.json'))
-        for f in files :
-            all_files.append(os.path.abspath(f))
 
-    return all_files
+    all_files = []
+
+
+    for (dirpath, dirnames, filenames) in os.walk(filepath):
+        
+      # filenames specified
+      if name_contains: 
+        all_files.extend(glob(os.path.join(dirpath,name_contains)))
+
+      elif not name_contains:
+        all_files.extend(filenames)
+      
+      # exclude subdirectories, break loop 
+      if not subdirectories:
+        break
+      # otherwise continue with loop, walking down the directory
+
+    # get absolute path
+    if absolute_path: 
+      all_files_absolute = [os.path.abspath(f) for f in all_files]
+      return all_files_absolute
+
+    else:
+      return all_files
+
 
 
 

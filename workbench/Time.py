@@ -50,7 +50,7 @@ class Time:
 	        return d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))    
 
 
-	def sleep_countdown(duration, print_step=2):
+	def sleep_countdown(duration, print_step=1):
 		"""Sleep for certain duration and print remaining time in steps of print_step
 		
 		Input

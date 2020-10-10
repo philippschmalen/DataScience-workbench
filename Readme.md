@@ -14,14 +14,18 @@ pip install datascience-workbench
 ## Usage
 
 ```python
-import workbench
+from workbench import Lists as wl
+from workbench import Time as wt
 
-# or 
-from workbench import Lists as l
-from workbench import Time as t
+
+
 ```
 
 <!-- # [TODO: ADD EXAMPLE] -->
+## Todo 
+
+1. add unit tests
+2. 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

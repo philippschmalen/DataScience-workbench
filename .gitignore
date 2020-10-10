@@ -1,0 +1,9 @@
+# Files
+
+# Folders
+.tests
+.ipynb_checkpoints
+_build
+__pycache__
+*.egg-info
+
