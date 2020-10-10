@@ -8,7 +8,7 @@ It gives a shortcut to processing, storing and preparing data.
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
 
 ```bash
-pip install ds_workbench
+pip install datascience-workbench
 ```
 
 ## Usage
@@ -16,6 +16,9 @@ pip install ds_workbench
 ```python
 import workbench
 
+# or 
+from workbench import Lists as l
+from workbench import Time as t
 ```
 
 <!-- # [TODO: ADD EXAMPLE] -->
