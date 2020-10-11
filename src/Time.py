@@ -69,7 +69,7 @@ class Time:
 			    sys.stdout.write("{:2d}".format(remaining))
 			    sys.stdout.flush()
 
-			time.sleep(1)
+			sleep(1)
 
 		sys.stdout.write("\r Complete!\n")
 
