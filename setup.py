@@ -6,11 +6,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='datascience-workbench',
-      version='0.2.3',
+      version='0.0.2',
       description='Utilities for data science projects',
 		long_description=long_description,
     	long_description_content_type="text/markdown",
-      packages=['workbench'],
+      packages=['src'],
       author = 'Philipp Schmalen',
       author_email = 'philippschmalen@gmail.com',
       zip_safe=False)

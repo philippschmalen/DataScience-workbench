@@ -1,9 +1,7 @@
-# Upload your own package to Test-Pypi and Pypi
+# How to upload your own Python package and have custom shortcuts for your data science projects - Pypi, Anaconda, Sublime REPL
 
 
-## Requirements
-
-I use Anaconda, Sublime REPL and 
+I use Anaconda, Sublime and Sublime REPL.
 
 
 ## Before you start
@@ -45,7 +43,7 @@ switch to environment with SublimeREPL, checkout: https://stackoverflow.com/ques
 
 ```bash
 	# install newly create package
-	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps example-pkg-YOUR-USERNAME-HERE
+	python -m pip install --index-url https://test.pypi.org/simple/ --no-deps example-pkg-YOUR-USERNAME-HERE
 ```
 
 
