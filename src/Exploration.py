@@ -30,37 +30,52 @@ class Exploration:
 		print('*'*40)
 			
 
-def inspect_missings(data):
-	"""Inspect missings across rows and across columns
-	
-	:param data: pandas dataframe 
-	:return: List with column names that contain missings 
-	"""
-	print("MISSINGS")
-	print('-'*40)
-	# check rows
-	rows_all = data.shape[0]
-	rows_nomiss = data.dropna().shape[0]
-
-	rowmiss_count = rows_all - rows_nomiss
-	rowmiss_share = rowmiss_count/rows_all*100
-
-	print("Missings per row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
-	print()
-	
-	# check columns
-	col_miss = [col for col in data.columns if data[col].isna().any()]
-	# no missings for any column
-	if not col_miss:
-		print("No missings for any column.")
-	else:
-		# print share of missings for each column
-		print("Column missings")
-		ds_colmiss = data.loc[:,col_miss].isna().sum()
-		ds_colmiss_relative = data.loc[:,col_miss].isna().sum()/rows_all*100
+	def inspect_missings(data):
+		"""Inspect missings across rows and across columns
 		
-		print(pd.concat([ds_colmiss, ds_colmiss_relative], axis=1, keys=['Count', 'Share (%)']))
+		:param data: pandas dataframe 
+		:return: List with column names that contain missings 
+		"""
+		print("MISSINGS")
+		print('-'*40)
+		# check rows
+		rows_all = data.shape[0]
+		rows_nomiss = data.dropna().shape[0]
+
+		rowmiss_count = rows_all - rows_nomiss
+		rowmiss_share = rowmiss_count/rows_all*100
+
+		print("Missings per row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
+		print()
+		
+		# check columns
+		col_miss = [col for col in data.columns if data[col].isna().any()]
+		# no missings for any column
+		if not col_miss:
+			print("No missings for any column.")
+		else:
+			# print share of missings for each column
+			print("Column missings")
+			ds_colmiss = data.loc[:,col_miss].isna().sum()
+			ds_colmiss_relative = data.loc[:,col_miss].isna().sum()/rows_all*100
 			
-	print('*'*40)
-	
-	return list(ds_colmiss.index)
+			print(pd.concat([ds_colmiss, ds_colmiss_relative], axis=1, keys=['Count', 'Share (%)']))
+				
+		print('*'*40)
+		
+		return list(ds_colmiss.index)
+
+
+	def calculate_set_difference(ds1,ds2):
+		"""Obtain the set difference of two Series
+
+		:param ds1: Pandas Series 1
+		:param ds2: Pandas Series 2
+		:return : set_difference
+		"""
+
+		set_difference = pd.concat([ds1, ds2, ds2]).drop_duplicates(keep=False)
+
+		return set_difference
+
+
