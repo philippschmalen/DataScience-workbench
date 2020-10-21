@@ -66,16 +66,3 @@ class Exploration:
 		return list(ds_colmiss.index)
 
 
-	def calculate_set_difference(ds1,ds2):
-		"""Obtain the set difference of two Series
-
-		:param ds1: Pandas Series 1
-		:param ds2: Pandas Series 2
-		:return : set_difference
-		"""
-
-		set_difference = pd.concat([ds1, ds2, ds2]).drop_duplicates(keep=False)
-
-		return set_difference
-
-

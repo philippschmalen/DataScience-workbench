@@ -85,4 +85,33 @@ class Processing:
     
     # nothing is returned, but a print statement indicates that the function has run
     print('Path created: '+str(data_dir)+'/'+str(filename))
-      
+
+
+  def series_set_difference(ds1,ds2):
+    """Obtain the set difference of two Series
+
+    :param ds1: Pandas Series 1
+    :param ds2: Pandas Series 2
+    :return : set_difference
+    """
+
+    set_difference = pd.concat([ds1, ds2, ds2]).drop_duplicates(keep=False)
+
+    return set_difference
+
+  def series_duplicate(s, times=2, axis=0, reset_index=True):
+    """Create a dataframe by repeating series multiple times
+
+    :param s: pandas series
+    :param times: how often the series should be repeated 
+    :param axis: repeat over rows (axis=0) or over columns (=1)
+    :param reset_index: reset index to consecutive integer
+
+    :return : pandas DataFrame or Series with repeated Series from args 
+    """
+    df_dup = pd.concat([s] * times, axis=axis)
+
+    if reset_index:
+      df_dup = df_dup.reset_index(drop=True)
+
+    return df_dup 
