@@ -33,8 +33,11 @@ class Exploration:
 	def inspect_missings(data):
 		"""Inspect missings across rows and across columns
 		
-		:param data: pandas dataframe 
-		:return: List with column names that contain missings 
+		Args 
+			data: pandas dataframe 
+			
+		Returns
+			:return : dataframe with info on column missings  
 		"""
 		print("MISSINGS")
 		print('-'*40)
@@ -45,7 +48,7 @@ class Exploration:
 		rowmiss_count = rows_all - rows_nomiss
 		rowmiss_share = rowmiss_count/rows_all*100
 
-		print("Missings per row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
+		print("Any missing in any row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
 		print()
 		
 		# check columns
@@ -59,10 +62,12 @@ class Exploration:
 			ds_colmiss = data.loc[:,col_miss].isna().sum()
 			ds_colmiss_relative = data.loc[:,col_miss].isna().sum()/rows_all*100
 			
-			print(pd.concat([ds_colmiss, ds_colmiss_relative], axis=1, keys=['Count', 'Share (%)']))
-				
+			df_colmiss = pd.concat([ds_colmiss, ds_colmiss_relative], axis=1, keys=['missing_count', 'share'])\
+							.sort_values("share", ascending=False)
+			
+			print(df_colmiss)
+			return df_colmiss
+			
 		print('*'*40)
-		
-		return list(ds_colmiss.index)
 
 
