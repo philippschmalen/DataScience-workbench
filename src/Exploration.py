@@ -70,4 +70,19 @@ class Exploration:
 			
 		print('*'*40)
 
+	def row_missing_count(df, top_n=None):
+		"""Inspect absolute and relative missings across rows
+		Args
+			df: pandas DataFrame
+			top_n: restrict output to top_n indices with most missings across columns 
+		Return
+			pandas dataframe with indices and their absolute and relative missings across columns
+		
+		"""
+		
+		df_colmiss_idx = df.T.isna().sum().sort_values(ascending=False)[:top_n]
+		df_colmiss_idx_share = df_colmiss_idx/df.shape[1]
+		
+		return pd.concat([df_colmiss_idx, df_colmiss_idx_share], axis=1, keys=['missing_count', 'missing_share'])
+
 
