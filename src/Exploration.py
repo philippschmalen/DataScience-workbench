@@ -30,7 +30,7 @@ class Exploration:
 		print('*'*40)
 			
 
-	def inspect_missings(data):
+	def inspect_missings(data, verbose=True):
 		"""Inspect missings across rows and across columns
 		
 		Args 
@@ -39,8 +39,10 @@ class Exploration:
 		Returns
 			:return : dataframe with info on column missings  
 		"""
-		print("MISSINGS")
-		print('-'*40)
+		if verbose:
+			print("MISSINGS")
+			print('-'*40)
+			
 		# check rows
 		rows_all = data.shape[0]
 		rows_nomiss = data.dropna().shape[0]
@@ -48,8 +50,9 @@ class Exploration:
 		rowmiss_count = rows_all - rows_nomiss
 		rowmiss_share = rowmiss_count/rows_all*100
 
-		print("Any missing in any row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
-		print()
+		if verbose:
+			print("Any missing in any row: {}/{} ({} %)".format(rowmiss_count,rows_all, rowmiss_share))
+			print()
 		
 		# check columns
 		col_miss = [col for col in data.columns if data[col].isna().any()]
@@ -58,17 +61,17 @@ class Exploration:
 			print("No missings for any column.")
 		else:
 			# print share of missings for each column
-			print("Column missings")
+			print("Return info on column missings")
 			ds_colmiss = data.loc[:,col_miss].isna().sum()
 			ds_colmiss_relative = data.loc[:,col_miss].isna().sum()/rows_all*100
 			
 			df_colmiss = pd.concat([ds_colmiss, ds_colmiss_relative], axis=1, keys=['missing_count', 'share'])\
 							.sort_values("share", ascending=False)
-			
-			print(df_colmiss)
+			if verbose:
+				print(df_colmiss)
+				print('*'*40)
+
 			return df_colmiss
-			
-		print('*'*40)
 
 	def row_missing_count(df, top_n=None):
 		"""Inspect absolute and relative missings across rows
