@@ -1,5 +1,6 @@
 
 import pandas as pd
+import numpy as np
 
 class Exploration:
 	def inspect_core_specifications(data, descriptives=False):
