@@ -99,7 +99,7 @@ class Exploration:
 	        to keep columns
 	    :param data: dataframe
 	    :param max_missing: defines until which column-wise missing count should be iterated
-	    :return tuple of two numpy arrays for plotting: Columns to keep vs. rows dropped (%)
+	    :return list with indices to drop, tuple of numpy arrays for plotting: Columns to keep vs. rows dropped (%)
 	    """
 	    # count missings per column, store in series
 	    count_column_missing = data.isna().sum(axis=0).sort_values(ascending=False)
@@ -110,15 +110,17 @@ class Exploration:
 
 	    # define until which column-wise missing count should be iterated
 	    plot_x, plot_y = np.zeros(max_missing), np.zeros(max_missing)
-
 	    print("Trade off rows against columns\nDrop rows and modifiy original dataframe to keep more columns\n")
 	    print("i\tKeep Columns\tDrop Rows [%]\n"+'-'*40)
+	    
+	    drop_rows = []
 	    for arr_idx, i in enumerate(count_column_missing_unique[:max_missing]):
 	        select_columns = count_column_missing[count_column_missing <= i].index
 
 	        # return indices (=ticker) where the 1 missing per column occurs
 	        indices_many_missings = list(data.loc[data[select_columns].isnull().any(1),:].index)
-
+	        drop_rows.append(indices_many_missings)
+	        
 	        ## compare modified vs. raw dropped missings
 	        # modified df 
 	        df_fin_mod = data.drop(indices_many_missings).dropna(axis=1)
@@ -151,8 +153,8 @@ class Exploration:
 	        # plot dropped rows against retained columns 
 	        # (x=100-pct_dropped_rows_mod, y=pct_dropped_rows_mod)
 	        plot_x[arr_idx], plot_y[arr_idx] = 100-pct_dropped_cols_mod, pct_dropped_rows_mod
-
 	        print("{}\t{}\t\t{}".format(i, plot_x[arr_idx], plot_y[arr_idx])) 
+	        
 
-	    return plot_x, plot_y
+	    return drop_rows, plot_x, plot_y
 
