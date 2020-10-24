@@ -112,7 +112,7 @@ class Exploration:
 	    plot_x, plot_y = np.zeros(max_missing), np.zeros(max_missing)
 
 	    print("Trade off rows against columns\nDrop rows and modifiy original dataframe to keep more columns\n")
-	    print("Keep Columns\tDrop Rows [%]")
+	    print("i\tKeep Columns\tDrop Rows [%]\n"+'-'*40)
 	    for arr_idx, i in enumerate(count_column_missing_unique[:max_missing]):
 	        select_columns = count_column_missing[count_column_missing <= i].index
 
@@ -152,7 +152,7 @@ class Exploration:
 	        # (x=100-pct_dropped_rows_mod, y=pct_dropped_rows_mod)
 	        plot_x[arr_idx], plot_y[arr_idx] = 100-pct_dropped_cols_mod, pct_dropped_rows_mod
 
-	        print("{}\t\t{}".format(plot_x[arr_idx], plot_y[arr_idx])) 
+	        print("{}\t{}\t\t{}".format(i, plot_x[arr_idx], plot_y[arr_idx])) 
 
 	    return plot_x, plot_y
 
